@@ -1,0 +1,4 @@
+If it is an implemented plugin, available in marketplaces. (under plugins tab)
+We can install it when needed, get it from the available
+if any updates have been done in the existing plugin, then it will be available in the updates tab.
+if you have any HPI file for plugin, then go to advanced settings and select deploy and upload the file (Download the HPI file) and install. and then checked the restart Jenkins. If no build run means immediately, it will be restarted.
