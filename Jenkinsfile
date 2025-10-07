@@ -17,7 +17,7 @@ pipeline {
                 echo 'Registering the metadata'
                 echo 'Another echo to make the pipeline a bit more complex'
                 registerBuildArtifactMetadata(
-                    name: "test-artifact-cherryl",
+                    name: "test-artifact-uma",
                     version: "1.0.0",
                     type: "docker",
                     url: "http://non:1111",
@@ -38,21 +38,7 @@ pipeline {
                 junit 'target/surefire-reports/*.xml'
             }
         }
-        // stage('Check Test Report Files') {
-        //     steps {
-        //         sh '''
-        //         echo "📂 Listing test report files..."
-        //         ls -l target/surefire-reports/*.xml || echo "❌ No XML files found"
-        //         '''
-        //     }
-        // }
-        // stage('Publish Test Results') {
-        //     steps {
-        //         junit testResults: 'target/surefire-reports/*.xml', allowEmptyResults: true, skipMarkingBuildUnstable: false
-        //     }
-        // }
-        
-      
+                
     }
      
 
