@@ -22,7 +22,7 @@ pipeline {
                     type: "docker",
                     url: "http://non:1111",
                     digest: "6f637064707039346163663237383938",
-                    label: "prod"
+                    label: "QA"
                 )
             }
         }
