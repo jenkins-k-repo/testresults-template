@@ -17,7 +17,7 @@ pipeline {
                 echo 'Registering the metadata'
                 echo 'Another echo to make the pipeline a bit more complex'
                 registerBuildArtifactMetadata(
-                    name: "test-artifact-main-branch",
+                    name: "Automation test for Register-Artifacts",
                     version: "1.0.0",
                     type: "docker",
                     url: "http://non:1111",
