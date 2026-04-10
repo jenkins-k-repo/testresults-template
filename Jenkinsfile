@@ -11,7 +11,14 @@ pipeline {
     }
 
    
-    stages {    
+    stages {
+        stage('Pre-Registration Wait') {
+            steps {
+                echo 'Waiting 30 seconds before registering build artifact...'
+                sleep(time: 30, unit: 'SECONDS')
+                echo 'Wait complete, proceeding to artifact registration'
+            }
+        }
        stage('Registering build artifact') {
             steps {
                 echo 'Registering the metadata'
