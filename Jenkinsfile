@@ -6,20 +6,18 @@ pipeline {
         MAVEN_OPTS = "-Dmaven.test.failure.ignore=true"
     }
 
-      tools {
+    tools {
         maven 'Maven 3'  // Define your Maven installation name from Jenkins Global Tool Configuration
     }
 
    
     stages {
-        stage('Pre-Registration Wait') {
+        stage('Build & Test') {
             steps {
-                echo 'Waiting 30 seconds before registering build artifact...'
-                sleep(time: 30, unit: 'SECONDS')
-                echo 'Wait complete, proceeding to artifact registration'
+                sh 'mvn clean test'
             }
         }
-       stage('Registering build artifact') {
+        stage('Registering build artifact') {
             steps {
                 echo 'Registering the metadata'
                 echo 'Another echo to make the pipeline a bit more complex'
@@ -33,12 +31,6 @@ pipeline {
                 )
             }
         }
-        
-        stage('Build & Test') {
-            steps {
-                sh 'mvn clean test'
-            }
-        }
 
         stage('Publish Test Results') {
             steps {
@@ -48,8 +40,6 @@ pipeline {
                 
     }
      
-
-
     post {
         always {
             echo 'Pipeline completed.'
@@ -59,5 +49,3 @@ pipeline {
         }
     }
 }
-  
- 
