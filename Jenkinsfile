@@ -10,13 +10,13 @@ pipeline {
         maven 'Maven 3'  // Define your Maven installation name from Jenkins Global Tool Configuration
     }
 
-   
     stages {
         stage('Build & Test') {
             steps {
                 sh 'mvn clean test'
             }
         }
+
         stage('Registering build artifact') {
             steps {
                 echo 'Registering the metadata'
@@ -37,9 +37,8 @@ pipeline {
                 junit 'target/surefire-reports/*.xml'
             }
         }
-                
     }
-     
+
     post {
         always {
             echo 'Pipeline completed.'
@@ -49,3 +48,5 @@ pipeline {
         }
     }
 }
+  
+ 
