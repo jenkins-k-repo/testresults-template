@@ -55,10 +55,10 @@ pipeline {
                     echo 'Registering the deployment metadata'
 
                     registerDeployedArtifactMetadata(
-                        name: "Automation test for Register-Artifacts",
-                        version: "1.0.0",
-                        artifactId: "${env.ARTIFACT_ID}",
-                        environment: "production"
+                        artifact: [
+                            id: "${env.ARTIFACT_ID}"
+                        ],
+                        targetEnvironment: "production"
                     )
 
                     echo "Deployment artifact registration completed successfully"
