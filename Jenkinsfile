@@ -31,6 +31,12 @@ pipeline {
                         label: "Artifact"
                     )
                     echo "Captured Artifact ID: ${env.ARTIFACT_ID}"
+
+                    // Verify artifact ID was captured successfully
+                    if (!env.ARTIFACT_ID) {
+                        error("Failed to capture Artifact ID from build artifact registration")
+                    }
+                    echo "Build artifact registration completed successfully"
                 }
             }
         }
@@ -38,11 +44,22 @@ pipeline {
         stage('Registering deployed artifact') {
             steps {
                 script {
+                    // Wait for build artifact registration to complete and verify artifact ID is available
+                    echo "Waiting for build artifact registration to complete..."
+
+                    if (!env.ARTIFACT_ID) {
+                        error("Artifact ID is not available. Build artifact registration may have failed.")
+                    }
+
+                    echo "Artifact ID verified: ${env.ARTIFACT_ID}"
                     echo 'Registering the deployment metadata'
+
                     registerDeployedArtifactMetadata(
                         artifactId: "${env.ARTIFACT_ID}",
                         targetEnvironment: "production"
                     )
+
+                    echo "Deployment artifact registration completed successfully"
                 }
             }
         }
