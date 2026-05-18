@@ -55,9 +55,7 @@ pipeline {
                     echo 'Registering the deployment metadata'
 
                     registerDeployedArtifactMetadata(
-                        artifactId: [
-                            id: "${env.ARTIFACT_ID}"
-                        ],
+                        artifactId: "${env.ARTIFACT_ID}",
                         targetEnvironment: "production"
                     )
 
