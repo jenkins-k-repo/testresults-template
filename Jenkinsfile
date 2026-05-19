@@ -58,8 +58,8 @@ pipeline {
                     echo "Registering deployment to environment: ${env.TARGET_ENV}"
 
                     registerDeployedArtifactMetadata(
-                        artifactId: "'${env.ARTIFACT_ID}'",
-                        targetEnvironment: "'${env.TARGET_ENV}'",
+                        artifactId: "${env.ARTIFACT_ID}",
+                        targetEnvironment: "production"
                     )
 
                     echo "Deployment artifact registration completed successfully"
