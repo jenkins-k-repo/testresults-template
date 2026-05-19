@@ -42,6 +42,9 @@ pipeline {
         }
 
         stage('Registering deployed artifact') {
+            environment {
+                TARGET_ENV = 'production'
+            }
             steps {
                 script {
                     // Wait for build artifact registration to complete and verify artifact ID is available
@@ -52,11 +55,11 @@ pipeline {
                     }
 
                     echo "Artifact ID verified: ${env.ARTIFACT_ID}"
-                    echo 'Registering the deployment metadata'
+                    echo "Registering deployment to environment: ${env.TARGET_ENV}"
 
                     registerDeployedArtifactMetadata(
-                        artifactId: "${env.ARTIFACT_ID}",
-                        targetEnvironment: "production"
+                        artifactId: "'${env.ARTIFACT_ID}'",
+                        targetEnvironment: "'${env.TARGET_ENV}'",
                     )
 
                     echo "Deployment artifact registration completed successfully"
