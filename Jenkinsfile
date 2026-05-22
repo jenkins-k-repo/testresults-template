@@ -21,29 +21,29 @@ pipeline {
             steps {
                 echo 'Registering the metadata'
                 echo 'Another echo to make the pipeline a bit more complex'
-                registerBuildArtifactMetadata(
-                    name: "Automation test for Register-Artifacts",
-                    version: "1.0.0",
-                    type: "docker",
-                    url: "http://non:1111",
-                    digest: "6f637064707039346163663237383938",
-                    label: "Artifact"
-                )
+                script {
+                    env.ARTIFACT_ID = registerBuildArtifactMetadata(
+                        name: "Automation test for Register-Artifacts",
+                        version: "1.0.0",
+                        type: "docker",
+                        url: "http://non:1111",
+                        digest: "6f637064707039346163663237383938",
+                        label: "Artifact"
+                    )
+                    echo "Registered artifact with ID: ${env.ARTIFACT_ID}"
+                }
             }
         }
 
         stage('Registering deployed artifact') {
             steps {
                 echo 'Registering deployed artifact metadata'
-                registerDeployedArtifactMetadata(
-                    name: "Automation test for Register-Artifacts",
-                    version: "1.0.0",
-                    type: "docker",
-                    url: "http://non:1111",
-                    digest: "6f637064707039346163663237383938",
-                    environment: "production",
-                    label: "Deployed-Artifact"
-                )
+                script {
+                    registerDeployedArtifactMetadata(
+                        artifactId: env.ARTIFACT_ID,
+                        targetEnvironment: "production"
+                    )
+                }
             }
         }
 
